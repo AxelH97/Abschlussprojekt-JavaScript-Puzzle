@@ -73,3 +73,9 @@ window.onload = function () {
     document.getElementById("pieces").append(tile);
   }
 };
+
+var reloadButton = document.getElementById("reloadButton");
+
+reloadButton.addEventListener("click", function () {
+  location.reload();
+});
