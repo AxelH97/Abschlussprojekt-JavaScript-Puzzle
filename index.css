@@ -4,8 +4,8 @@ body {
 }
 
 #board {
-  width: 480px;
-  height: 400px;
+  width: 30rem;
+  height: 30rem;
   border: 2px solid green;
 
   margin: 0 auto;
@@ -14,14 +14,14 @@ body {
 }
 
 #board img {
-  width: 94.6px;
-  height: 78px;
+  width: 5.87rem;
+  height: 5.87rem;
   border: 0.5px solid black;
 }
 
 #pieces {
-  width: 1045px;
-  height: 160px;
+  width: 65.9rem;
+  height: 10rem;
   border: 2px solid green;
 
   margin: 0 auto;
@@ -40,11 +40,16 @@ body {
   border: 2px solid green;
 }
 
+#reloadButton {
+  margin-top: 20px;
+  border: 2px solid green;
+}
+
 .countdown {
   font-size: 30px;
   font-weight: bold;
   color: red;
   border: 2px solid green;
   width: 120px;
-margin: 0 auto;
+  margin: 0 auto;
 }
