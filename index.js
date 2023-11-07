@@ -95,3 +95,8 @@ function startTimer(duration) {
     , 1000);
 }
 startTimer(300);
+var reloadButton = document.getElementById("reloadButton");
+
+reloadButton.addEventListener("click", function () {
+  location.reload();
+});

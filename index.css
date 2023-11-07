@@ -16,7 +16,7 @@ body {
 #board img {
   width: 94.6px;
   height: 78px;
-  border: 0.5px solid lightblue;
+  border: 0.5px solid black;
 }
 
 #pieces {
@@ -32,7 +32,12 @@ body {
 #pieces img {
   width: 79px;
   height: 79px;
-  border: 0.5px solid lightblue;
+  border: 0.5px solid black;
+}
+
+#reloadButton {
+  margin-top: 20px;
+  border: 2px solid green;
 }
 
 .countdown {
