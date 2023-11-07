@@ -34,3 +34,12 @@ body {
   height: 79px;
   border: 0.5px solid lightblue;
 }
+
+.countdown {
+  font-size: 30px;
+  font-weight: bold;
+  color: red;
+  border: 2px solid green;
+  width: 120px;
+margin: 0 auto;
+}

@@ -73,3 +73,25 @@ window.onload = function () {
     document.getElementById("pieces").append(tile);
   }
 };
+
+
+
+function startTimer(duration) {
+  var timer = duration,
+    minutes,
+    seconds;
+  var interval = setInterval(function () {
+    minutes = parseInt(timer / 60, 10);
+    seconds = parseInt(timer % 60, 10);
+    document.getElementById("timer").innerText = minutes + "m " + seconds + "s ";
+    if (--timer < 0) {
+      timer = duration;
+    }
+    if (timer == 0) {
+      alert("Time is up!");
+      clearInterval(interval);
+    }
+  }
+    , 1000);
+}
+startTimer(300);
