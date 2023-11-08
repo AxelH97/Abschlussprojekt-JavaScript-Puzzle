@@ -135,7 +135,7 @@ function moveEnd() {
 
   turns += 1;
   document.getElementById("turns").innerText = turns;
-  checkImagePlacement(currTile);
+
   checkImagePlacement(otherTile);
 }
 
