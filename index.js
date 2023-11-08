@@ -74,8 +74,6 @@ window.onload = function () {
   }
 };
 
-
-
 function startTimer(duration) {
   var timer = duration,
     minutes,
@@ -83,7 +81,8 @@ function startTimer(duration) {
   var interval = setInterval(function () {
     minutes = parseInt(timer / 60, 10);
     seconds = parseInt(timer % 60, 10);
-    document.getElementById("timer").innerText = minutes + "m " + seconds + "s ";
+    document.getElementById("timer").innerText =
+      minutes + "m " + seconds + "s ";
     if (--timer < 0) {
       timer = duration;
     }
@@ -91,8 +90,7 @@ function startTimer(duration) {
       alert("Time is up!");
       clearInterval(interval);
     }
-  }
-    , 1000);
+  }, 1000);
 }
 startTimer(300);
 var reloadButton = document.getElementById("reloadButton");
