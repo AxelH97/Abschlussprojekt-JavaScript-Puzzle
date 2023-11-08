@@ -226,7 +226,6 @@ function startTimer(duration) {
 startTimer(300);
 
 let reloadButton = document.getElementById("reloadButton");
-
 reloadButton.addEventListener("click", function () {
   location.reload();
 });
