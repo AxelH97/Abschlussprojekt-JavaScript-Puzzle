@@ -17,7 +17,7 @@ function moveEnter(e) {
   e.preventDefault();
 }
 
-function moveLeave() {}
+function moveLeave() { }
 
 function moveDrop() {
   otherTile = this;
@@ -76,22 +76,19 @@ window.onload = function () {
 
 
 
-function startTimer(duration) {
+function startTimer(duration) {    //das ist die funktion für den timer
   var timer = duration,
     minutes,
     seconds;
   var interval = setInterval(function () {
-    minutes = parseInt(timer / 60, 10);
+    minutes = parseInt(timer / 60, 10);  
     seconds = parseInt(timer % 60, 10);
-    document.getElementById("timer").innerText = minutes + "m " + seconds + "s ";
+    document.getElementById("timer").innerText = minutes + "m " + seconds + "s "; //hier wird auch die preziese Zeit angezeigt min und sek
     if (--timer < 0) {
       timer = duration;
-    }
-    if (timer == 0) {
-      alert("Time is up!");
       clearInterval(interval);
+      document.getElementById("message").style.display = "block"; // Zeigt die nachricht über dem timer an wenn die zeit abgelaufen ist 
     }
-  }
-    , 1000);
+  }, 1000);
 }
-startTimer(300);
+startTimer(300); // Zeit wariabel einstellen um das spiel zu verlängern oder zu verkürzen

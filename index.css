@@ -11,12 +11,14 @@ body {
   margin: 0 auto;
   display: flex;
   flex-wrap: wrap;
+ 
 }
 
 #board img {
   width: 94.6px;
   height: 78px;
   border: 0.5px solid lightblue;
+ 
 }
 
 #pieces {
@@ -35,11 +37,27 @@ body {
   border: 0.5px solid lightblue;
 }
 
+/* der style für den timer so aufgebaut wie 
+der von der message */
 .countdown {
   font-size: 30px;
   font-weight: bold;
+  background-color: rgba(0, 0, 0, 0.774);
   color: red;
-  border: 2px solid green;
   width: 120px;
-margin: 0 auto;
+  margin: 0 auto;
+  box-shadow: 0px 0px 10px #888888;
 }
+
+/* der style für die message */
+#message {
+  display: none;
+  position: fixed;
+  color: red;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(0, 0, 0, 0.774);
+  padding: 20px;
+  box-shadow: 0px 0px 10px #888888;
+} 
