@@ -1,21 +1,25 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Panda Puzzle</title>
-    <link rel="stylesheet" href="index.css" />
-  </head>
 
-  <body>
-    <h1>Puzzle</h1>
-    <div id="board"></div>
-    <h2>Gespielte Züge: <span id="turns">0</span></h2><br>
-    <div class="countdown" id="timer">300</div>  <br>
-    <div id="pieces"></div>
-   
-    <button id="reloadButton">Neu laden</button>
-    <script src="index.js"></script>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Panda Puzzle</title>
+  <link rel="stylesheet" href="index.css" />
+</head>
 
-  </body>
+<body>
+  <h1>Puzzle</h1> 
+  <div id="board"></div>
+  <h2>Gespielte Züge: <span id="turns">0</span></h2><br>
+  <div class="countainer" id="timer">300</div> <br>
+  <div id="pieces"></div>
+  <button class="container" id="toggleButton">Bild anzeigen/ausblenden</button>
+    <img id="image" src="images/hauptbild.jpg" style="display: none;">
+  
+  <button id="reloadButton">Neu laden</button>
+  <script src="index.js"></script>
+
+</body>
+
 </html>
