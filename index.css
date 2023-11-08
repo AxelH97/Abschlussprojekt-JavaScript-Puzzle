@@ -31,6 +31,7 @@ h2 {
   margin: 0 auto;
   display: flex;
   flex-wrap: wrap;
+ 
   margin-top: 50px;
 }
 
@@ -38,6 +39,7 @@ h2 {
   width: 5.87rem;
   height: 5.87rem;
   border: 0.5px solid black;
+ 
 }
 
 #pieces {
@@ -66,11 +68,13 @@ h2 {
   border: 2px solid green;
 }
 
+/* der style für den timer so aufgebaut wie 
+der von der message */
 .countdown {
   font-size: 30px;
   font-weight: bold;
+  background-color: rgba(0, 0, 0, 0.774);
   color: red;
-  border: 2px solid green;
   width: 120px;
   margin: 0 auto;
 }

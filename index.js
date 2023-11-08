@@ -17,7 +17,7 @@ function moveEnter(e) {
   e.preventDefault();
 }
 
-function moveLeave() {}
+function moveLeave() { }
 
 function moveDrop() {
   otherTile = this;
@@ -76,45 +76,19 @@ window.onload = function () {
 
 
 
-function startTimer(duration) {
+function startTimer(duration) {    //das ist die funktion für den timer
   var timer = duration,
     minutes,
     seconds;
   var interval = setInterval(function () {
-    minutes = parseInt(timer / 60, 10);
+    minutes = parseInt(timer / 60, 10);  
     seconds = parseInt(timer % 60, 10);
-    document.getElementById("timer").innerText = minutes + "m " + seconds + "s ";
+    document.getElementById("timer").innerText = minutes + "m " + seconds + "s "; //hier wird auch die preziese Zeit angezeigt min und sek
     if (--timer < 0) {
       timer = duration;
-    }
-    if (timer == 0) {
-      alert("Time is up!");
       clearInterval(interval);
+      document.getElementById("message").style.display = "block"; // Zeigt die nachricht über dem timer an wenn die zeit abgelaufen ist 
     }
-  }
-    , 1000);
+  }, 1000);
 }
 startTimer(300);
-var reloadButton = document.getElementById("reloadButton");
-
-reloadButton.addEventListener("click", function () {
-  location.reload();
-});
-
-const image = document.getElementById('image');
-const toggleButton = document.getElementById('toggleButton');
-
-let isImageVisible = false;
-
-// dazu da das das Bild beim Start nicht angezeigt wird aber dafür beim klicken 
-function toggleImage() {
-  if (isImageVisible) {
-    image.style.display = 'none'; // Bild ausblenden
-  } else {
-    image.style.display = 'block'; // Bild anzeigen
-  }
-  isImageVisible = !isImageVisible;
-}
-
-toggleButton.addEventListener('mousedown', toggleImage);
-toggleButton.addEventListener('mouseup', toggleImage);
