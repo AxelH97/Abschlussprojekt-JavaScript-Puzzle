@@ -104,12 +104,12 @@ reloadButton.addEventListener("click", function () {
   location.reload();
 }); */
 
-var rows = 5;
-var columns = 5;
+let rows = 5;
+let columns = 5;
 
-var currTile;
-var otherTile;
-var turns = 0;
+let currTile;
+let otherTile;
+let turns = 0;
 
 function moveStart() {
   currTile = this;
@@ -224,3 +224,9 @@ function startTimer(duration) {
   }, 1000);
 }
 startTimer(300);
+
+let reloadButton = document.getElementById("reloadButton");
+
+reloadButton.addEventListener("click", function () {
+  location.reload();
+});
