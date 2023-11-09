@@ -91,4 +91,4 @@ function startTimer(duration) {    //das ist die funktion für den timer
     }
   }, 1000);
 }
-startTimer(300);
+startTimer(180);

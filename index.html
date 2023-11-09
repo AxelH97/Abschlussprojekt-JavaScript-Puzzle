@@ -10,11 +10,15 @@
 
 <body>
   <h1>Puzzle</h1>
-  <div id="board"></div>
+ <button class="container" id="toggleButton">Bild anzeigen/ausblenden</button>
+    <img id="image" src="images/hauptbild.jpg" style="display: none;"> <br><br><br>
+ <div id="board"></div>
   <h2>Gespielte Züge: <span id="turns">0</span></h2><br>
-  <div class="countdown" id="timer">5</div> <br> <!-- die div für den timer  -->
-  <div id="message">Zeit ist um!</div><br> <!-- message für den timer  -->
+  <div class="countainer" id="timer">3</div> <br>
   <div id="pieces"></div>
+ 
+  
+  <button id="reloadButton">Neu laden</button>
   <script src="index.js"></script>
 
 </body>
