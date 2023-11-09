@@ -9,7 +9,7 @@ body {
   height: 30rem;
   border: 2px solid green;
 
-  margin: 0 auto;
+margin: 0 auto;
   display: flex;
   flex-wrap: wrap;
 }
@@ -56,12 +56,13 @@ body {
 }
 
 .container {
+text-align: center;
     border: 2px solid green;
-    margin: 0 auto;
     
   }
   
   #image {
+  
     width: 30%;
     height: 30%;
     border: 2px solid rgb(5, 226, 218);
