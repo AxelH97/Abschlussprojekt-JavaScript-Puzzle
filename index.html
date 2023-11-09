@@ -1,26 +1,29 @@
 <!DOCTYPE html>
 <html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Panda Puzzle</title>
+    <link rel="stylesheet" href="index.css" />
+  </head>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Panda Puzzle</title>
-  <link rel="stylesheet" href="index.css" />
-</head>
+  <body>
+    <h1>Puzzle</h1>
 
-<body>
-  <h1>Puzzle</h1> 
- <button class="container" id="toggleButton">Bild anzeigen/ausblenden</button>
-    <img id="image" src="images/hauptbild.jpg" style="display: none;"> <br><br><br>
- <div id="board"></div>
-  <h2>Gespielte Züge: <span id="turns">0</span></h2><br>
-  <div class="countainer" id="timer">3</div> <br>
-  <div id="pieces"></div>
- 
-  
-  <button id="reloadButton">Neu laden</button>
-  <script src="index.js"></script>
+    <button class="container" id="toggleButton">
+      Bild anzeigen/ausblenden
+    </button>
+    <div class="obere-div">
+      <div id="board"></div>
+      <img id="image" src="images/hauptbild.jpg" style="display: none" />
+    </div>
+    <h2>Gespielte Züge: <span id="turns">0</span></h2>
+    <br />
+    <div class="countainer" id="timer">3</div>
+    <br />
+    <div id="pieces"></div>
 
-</body>
-
+    <button id="reloadButton">Neu laden</button>
+    <script src="index.js"></script>
+  </body>
 </html>
