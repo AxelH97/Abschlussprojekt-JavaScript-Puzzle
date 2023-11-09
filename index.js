@@ -229,3 +229,21 @@ let reloadButton = document.getElementById("reloadButton");
 reloadButton.addEventListener("click", function () {
   location.reload();
 });
+
+const image = document.getElementById("image");
+const toggleButton = document.getElementById("toggleButton");
+
+let isImageVisible = false;
+
+// dazu da das das Bild beim Start nicht angezeigt wird aber dafür beim klicken
+function toggleImage() {
+  if (isImageVisible) {
+    image.style.display = "none"; // Bild ausblenden
+  } else {
+    image.style.display = "block"; // Bild anzeigen
+  }
+  isImageVisible = !isImageVisible;
+}
+
+toggleButton.addEventListener("mousedown", toggleImage);
+toggleButton.addEventListener("mouseup", toggleImage);
