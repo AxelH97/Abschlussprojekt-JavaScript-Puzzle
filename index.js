@@ -220,10 +220,11 @@ function startTimer(duration) {
       timer = duration;
       clearInterval(interval);
       document.getElementById("message").style.display = "block"; // Zeigt die nachricht über dem timer an wenn die zeit abgelaufen ist
+      moveEnd();
     }
   }, 1000);
 }
-startTimer(180);
+startTimer(10);
 
 let reloadButton = document.getElementById("reloadButton");
 reloadButton.addEventListener("click", function () {
