@@ -153,9 +153,9 @@ function checkImagePlacement(image) {
   ).indexOf(image);
 
   if (imageOrder === boardIndex + 1) {
-    image.style.border = "0.5px solid green"; // Bild ist an der richtigen Stelle
+    image.style.border = "1.5px solid green"; // Bild ist an der richtigen Stelle
   } else {
-    image.style.border = "0.5px solid red"; // Bild ist an der falschen Stelle
+    image.style.border = "1.5px solid red"; // Bild ist an der falschen Stelle
   }
 }
 
@@ -163,7 +163,7 @@ window.onload = function () {
   for (let r = 0; r < rows; r++) {
     for (let c = 0; c < columns; c++) {
       let tile = document.createElement("img");
-      tile.src = "./images/blank.jpg";
+      tile.src = "./images/annie-spratt-yI3weKNBRTc-unsplash (1).jpg";
 
       tile.addEventListener("dragstart", moveStart);
       tile.addEventListener("dragover", moveOver);
