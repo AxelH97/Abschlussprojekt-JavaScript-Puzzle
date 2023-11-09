@@ -1,4 +1,4 @@
-var rows = 5;
+/* var rows = 5;
 var columns = 5;
 
 var currTile;
@@ -83,12 +83,149 @@ function startTimer(duration) {    //das ist die funktion für den timer
   var interval = setInterval(function () {
     minutes = parseInt(timer / 60, 10);  
     seconds = parseInt(timer % 60, 10);
+    document.getElementById("timer").innerText =
+      minutes + "m " + seconds + "s ";
     document.getElementById("timer").innerText = minutes + "m " + seconds + "s "; //hier wird auch die preziese Zeit angezeigt min und sek
     if (--timer < 0) {
       timer = duration;
+    }
+    if (timer == 0) {
+      alert("Time is up!");
       clearInterval(interval);
       document.getElementById("message").style.display = "block"; // Zeigt die nachricht über dem timer an wenn die zeit abgelaufen ist 
     }
   }, 1000);
+  }, 1000);
+}
+startTimer(300);
+var reloadButton = document.getElementById("reloadButton");
+
+reloadButton.addEventListener("click", function () {
+  location.reload();
+}); */
+
+let rows = 5;
+let columns = 5;
+
+let currTile;
+let otherTile;
+let turns = 0;
+
+function moveStart() {
+  currTile = this;
+}
+
+function moveOver(e) {
+  e.preventDefault();
+}
+
+function moveEnter(e) {
+  e.preventDefault();
+}
+
+function moveLeave() {}
+
+function moveDrop() {
+  otherTile = this;
+}
+
+function moveEnd() {
+  if (currTile.src.includes("blank")) {
+    return;
+  }
+  let currImg = currTile.src;
+  let otherImg = otherTile.src;
+  currTile.src = otherImg;
+  otherTile.src = currImg;
+
+  turns += 1;
+  document.getElementById("turns").innerText = turns;
+
+  checkImagePlacement(otherTile);
+}
+
+function checkImagePlacement(image) {
+  const imageName = image.src.split("/").pop();
+  const imageOrder = parseInt(imageName.split(".")[0], 10);
+
+  const boardIndex = Array.from(
+    document.getElementById("board").children
+  ).indexOf(image);
+
+  if (imageOrder === boardIndex + 1) {
+    image.style.border = "1.5px solid green"; // Bild ist an der richtigen Stelle
+  } else {
+    image.style.border = "1.5px solid red"; // Bild ist an der falschen Stelle
+  }
+}
+
+window.onload = function () {
+  for (let r = 0; r < rows; r++) {
+    for (let c = 0; c < columns; c++) {
+      let tile = document.createElement("img");
+      tile.src = "./images/annie-spratt-yI3weKNBRTc-unsplash (1).jpg";
+
+      tile.addEventListener("dragstart", moveStart);
+      tile.addEventListener("dragover", moveOver);
+      tile.addEventListener("dragenter", moveEnter);
+      tile.addEventListener("dragleave", moveLeave);
+      tile.addEventListener("drop", moveDrop);
+      tile.addEventListener("dragend", moveEnd);
+
+      document.getElementById("board").append(tile);
+    }
+  }
+
+  let pieces = [];
+  for (let i = 1; i <= rows * columns; i++) {
+    pieces.push(i.toString() + ".jpg");
+  }
+
+  pieces = shuffleArray(pieces); // Mische die Bilder
+
+  for (let i = 0; i < pieces.length; i++) {
+    let tile = document.createElement("img");
+    tile.src = "./images/" + pieces[i];
+
+    tile.addEventListener("dragstart", moveStart);
+    tile.addEventListener("dragover", moveOver);
+    tile.addEventListener("dragenter", moveEnter);
+    tile.addEventListener("dragleave", moveLeave);
+    tile.addEventListener("drop", moveDrop);
+    tile.addEventListener("dragend", moveEnd);
+
+    document.getElementById("pieces").append(tile);
+  }
+};
+
+function shuffleArray(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+  return array;
+}
+
+function startTimer(duration) {
+  //das ist die funktion für den timer
+  var timer = duration,
+    minutes,
+    seconds;
+  var interval = setInterval(function () {
+    minutes = parseInt(timer / 60, 10);
+    seconds = parseInt(timer % 60, 10);
+    document.getElementById("timer").innerText =
+      minutes + "m " + seconds + "s "; //hier wird auch die preziese Zeit angezeigt min und sek
+    if (--timer < 0) {
+      timer = duration;
+      clearInterval(interval);
+      document.getElementById("message").style.display = "block"; // Zeigt die nachricht über dem timer an wenn die zeit abgelaufen ist
+    }
+  }, 1000);
 }
 startTimer(180);
+
+let reloadButton = document.getElementById("reloadButton");
+reloadButton.addEventListener("click", function () {
+  location.reload();
+});
