@@ -10,8 +10,6 @@ body {
 h1 {
   font-family: "Bruno Ace", sans-serif;
   font-size: 55px;
-  font-family: "Bruno Ace", sans-serif;
-  font-size: 55px;
   text-shadow: 2px 2px 4px #f7ecec;
   display: inline;
 }
@@ -26,9 +24,6 @@ h2 {
   height: 30rem;
   box-shadow: 0px 0px 30px #888888;
   margin-left: 50px;
-  border: 2px solid green;
-  margin-left: 50px;
-
   display: flex;
   flex-wrap: wrap;
 }
@@ -44,7 +39,6 @@ h2 {
   height: 10rem;
   box-shadow: 0px 0px 10px #888888;
   margin: 0 auto;
-
   display: flex;
   flex-wrap: wrap;
 }
@@ -101,48 +95,6 @@ der von der message */
   width: 30%;
   height: 30%;
   box-shadow: 0px 0px 15px #888888;
-}
-
-.obere-div {
-  display: flex;
-  justify-content: space-around;
-}
-
-/* der style für den timer so aufgebaut wie 
-der von der message */
-.countdown {
-  font-size: 30px;
-  font-weight: bold;
-  background-color: rgba(0, 0, 0, 0.774);
-  color: red;
-  width: 120px;
-  margin: 0 auto;
-  box-shadow: 0px 0px 10px #888888;
-}
-
-/* der style für die message */
-#message {
-  display: none;
-  position: fixed;
-  color: red;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background-color: rgba(0, 0, 0, 0.774);
-  padding: 20px;
-  box-shadow: 0px 0px 10px #888888;
-}
-.container {
-  text-align: center;
-  margin-bottom: 20px;
-  border: 2px solid green;
-  height: 50px;
-}
-
-#image {
-  width: 30%;
-  height: 30%;
-  border: 2px solid rgb(5, 226, 218);
 }
 
 .obere-div {
