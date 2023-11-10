@@ -107,6 +107,9 @@ var otherTile;
 var turns = 0;
 
 function moveStart() {
+  if (this.style.border.includes("green")) {
+    return;
+  }
   currTile = this;
 }
 
