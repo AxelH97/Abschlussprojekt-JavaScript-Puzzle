@@ -118,6 +118,7 @@ function moveStart() {
     return;
   }
   currTile = this;
+  this.style.border = "1px solid black";
 }
 
 function moveOver(e) {
