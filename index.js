@@ -114,7 +114,7 @@ let turns = 0;
 let timerExpired = false;
 
 function moveStart() {
-  if (timerExpired) {
+  if (this.style.border.includes("green")) {
     return;
   }
   currTile = this;
