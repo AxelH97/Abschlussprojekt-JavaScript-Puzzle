@@ -224,7 +224,7 @@ function startTimer(duration) {
     }
   }, 1000);
 }
-startTimer(10);
+startTimer(180);
 
 let reloadButton = document.getElementById("reloadButton");
 reloadButton.addEventListener("click", function () {
