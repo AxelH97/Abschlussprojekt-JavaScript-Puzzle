@@ -111,7 +111,12 @@ let currTile;
 let otherTile;
 let turns = 0;
 
+let timerExpired = false;
+
 function moveStart() {
+  if (timerExpired) {
+    return;
+  }
   currTile = this;
 }
 
@@ -130,7 +135,7 @@ function moveDrop() {
 }
 
 function moveEnd() {
-  if (currTile.src.includes("blank")) {
+  if (timerExpired || currTile.src.includes("blank")) {
     return;
   }
   let currImg = currTile.src;
@@ -207,7 +212,6 @@ function shuffleArray(array) {
 }
 
 function startTimer(duration) {
-  //das ist die funktion für den timer
   var timer = duration,
     minutes,
     seconds;
@@ -215,16 +219,28 @@ function startTimer(duration) {
     minutes = parseInt(timer / 60, 10);
     seconds = parseInt(timer % 60, 10);
     document.getElementById("timer").innerText =
-      minutes + "m " + seconds + "s "; //hier wird auch die preziese Zeit angezeigt min und sek
+      minutes + "m " + seconds + "s ";
     if (--timer < 0) {
       timer = duration;
       clearInterval(interval);
-      document.getElementById("message").style.display = "block"; // Zeigt die nachricht über dem timer an wenn die zeit abgelaufen ist
-      moveEnd();
+      timerExpired = true; // Timer ist abgelaufen
+      document.getElementById("message").style.display = "block";
+
+      // Entferne die Eventlistener für das Ziehen der Bilder
     }
   }, 1000);
 }
 startTimer(180);
+startTimer(10);
+removeDragEventListeners();
+
+function removeDragEventListeners() {
+  const tiles = document.querySelectorAll("img");
+  tiles.forEach(function (tile) {
+    tile.removeEventListener("dragstart", moveStart);
+    tile.removeEventListener("dragend", moveEnd);
+  });
+}
 
 let reloadButton = document.getElementById("reloadButton");
 reloadButton.addEventListener("click", function () {
