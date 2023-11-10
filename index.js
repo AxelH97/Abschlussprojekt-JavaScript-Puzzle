@@ -17,7 +17,7 @@ function moveEnter(e) {
   e.preventDefault();
 }
 
-function moveLeave() { }
+function moveLeave() {}
 
 function moveDrop() {
   otherTile = this;
@@ -74,30 +74,37 @@ window.onload = function () {
   }
 };
 
-
-
-function startTimer(duration) {    //das ist die funktion für den timer
+function startTimer(duration) {
   var timer = duration,
     minutes,
     seconds;
   var interval = setInterval(function () {
-    minutes = parseInt(timer / 60, 10);  
+    minutes = parseInt(timer / 60, 10);
     seconds = parseInt(timer % 60, 10);
     document.getElementById("timer").innerText =
       minutes + "m " + seconds + "s ";
-    document.getElementById("timer").innerText = minutes + "m " + seconds + "s "; //hier wird auch die preziese Zeit angezeigt min und sek
+    document.getElementById("timer").innerText =
+      minutes + "m " + seconds + "s ";
     if (--timer < 0) {
       timer = duration;
     }
     if (timer == 0) {
       alert("Time is up!");
       clearInterval(interval);
-      document.getElementById("message").style.display = "block"; // Zeigt die nachricht über dem timer an wenn die zeit abgelaufen ist 
+      timerExpired = true; // Timer ist abgelaufen
+      document.getElementById("message").innerText = "You lose, Time is up!";
+      document.getElementById("message").style.display = "block";
+      removeDragEventListeners();
+    } else if (allImagesPlacedCorrectly()) {
+      clearInterval(interval);
+      document.getElementById("message").innerText = "You win!";
+      document.getElementById("message").style.display = "block";
+      removeDragEventListeners();
     }
   }, 1000);
   }, 1000);
 }
-startTimer(300);
+startTimer(30);
 var reloadButton = document.getElementById("reloadButton");
 
 reloadButton.addEventListener("click", function () {
@@ -272,3 +279,13 @@ function toggleImage() {
 
 toggleButton.addEventListener("mousedown", toggleImage);
 toggleButton.addEventListener("mouseup", toggleImage);
+
+function allImagesPlacedCorrectly() {
+  const imageElements = document.querySelectorAll("img");
+  for (const image of imageElements) {
+    if (!image.style.border.includes("green")) {
+      return false; // Es gibt mindestens ein Bild, das nicht korrekt platziert wurde
+    }
+  }
+  return true; // Alle Bilder sind korrekt platziert
+}
