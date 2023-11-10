@@ -114,10 +114,11 @@ let turns = 0;
 let timerExpired = false;
 
 function moveStart() {
-  if (timerExpired) {
+  if (this.style.border.includes("green")) {
     return;
   }
   currTile = this;
+  this.style.border = "1px solid black";
 }
 
 function moveOver(e) {
@@ -158,9 +159,17 @@ function checkImagePlacement(image) {
   ).indexOf(image);
 
   if (imageOrder === boardIndex + 1) {
-    image.style.border = "1.5px solid green"; // Bild ist an der richtigen Stelle
+    image.style.border = "1.5px solid green";
+    // Bild ist an der richtigen Stelle
+    image.removeEventListener("dragstart", moveStart);
+    image.removeEventListener("dragend", moveEnd);
+    image.removeEventListener("dragover", moveOver);
+    image.removeEventListener("dragenter", moveEnter);
+    image.removeEventListener("dragleave", moveLeave);
+    image.removeEventListener("drop", moveDrop);
   } else {
-    image.style.border = "1.5px solid red"; // Bild ist an der falschen Stelle
+    image.style.border = "1.5px solid red";
+    // Bild ist an der falschen Stelle
   }
 }
 
