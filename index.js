@@ -240,7 +240,6 @@ function startTimer(duration) {
   }, 1000);
 }
 startTimer(180);
-startTimer(10);
 removeDragEventListeners();
 
 function removeDragEventListeners() {
