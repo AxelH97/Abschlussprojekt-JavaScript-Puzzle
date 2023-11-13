@@ -167,13 +167,6 @@ function allImagesPlacedCorrectly() {
   return true; // Alle Bilder sind korrekt platziert
 }
 
-var rows = 5;
-var columns = 5;
-
-var currTile;
-var otherTile;
-var turns = 0;
-
 function moveStart() {
   currTile = this;
 }
@@ -209,7 +202,7 @@ window.onload = function () {
   for (let r = 0; r < rows; r++) {
     for (let c = 0; c < columns; c++) {
       let tile = document.createElement("img");
-      tile.src = "./images/blank.jpg";
+      tile.src = "./images/annie.jpg";
 
       tile.addEventListener("dragstart", moveStart);
       tile.addEventListener("dragover", moveOver);
@@ -274,7 +267,7 @@ startTimer(300); // Zeit wariabel einstellen um das spiel zu verlängern oder zu
 function playSound() {
   timerSound.currentTime = 0;
   timerSound.play("bing.mp3");
-  
+
   // Event-Listener entfernen, um nur einmal abzuspielen
   timerSound.removeEventListener("ended", playSound);
 }
