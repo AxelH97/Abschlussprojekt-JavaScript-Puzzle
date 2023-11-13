@@ -118,18 +118,17 @@ function startTimer(duration) {
     }
   }, 1000);
 }
-startTimer(180);
+startTimer(330);
 removeDragEventListeners();
-// // Let komplett einsetzen damit der sound abgespielt wird
-// let timerSound = document.getElementById("timerSound");
 
+// Let komplett einsetzen damit der sound abgespielt wird
+// let timerSound = document.getElementById("timerSound");
 function playSound() {
   timerSound.currentTime = 0;
   timerSound.play("bing.mp3");
   // Event-Listener entfernen, um nur einmal abzuspielen
   timerSound.removeEventListener("ended", playSound);
 }
-
 
 function removeDragEventListeners() {
   const tiles = document.querySelectorAll("img");
