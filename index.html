@@ -19,24 +19,25 @@
     <h1>Puzzle</h1>
     <br />
     <button class="container" id="toggleButton">
-      Gedrückt halten um Bild zu sehen 
+      Gedrückt halten um Bild zu sehen
     </button>
     <div class="obere-div">
       <div id="board"></div>
       <img id="image" src="images/hauptbild.jpg" style="display: none" />
     </div>
     <h2>Gespielte Züge: <span id="turns">0</span></h2>
-    <div class="countdown" id="timer">5:30</div>
-    <div id="message">Zeit ist um!</div><br>
+    <div class="countdown" id="timer"></div>
+    <div id="message"></div>
+    <br />
     <!-- message für den timer  -->
-    <button id="reloadButton">Neu laden</button><br><br>
+    <button id="reloadButton">Neu laden</button><br /><br />
     <div id="pieces"></div>
 
     <audio id="timerSound">
-      <source src="bing.mp3" type="audio/mp3">
+      <source src="bing.mp3" type="audio/mp3" />
       Your browser does not support the audio element.
-  </audio>
- 
+    </audio>
+
     <script src="index.js"></script>
   </body>
 </html>
