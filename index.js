@@ -36,9 +36,9 @@ function moveEnd() {
   otherTile.src = currImg;
   turns += 1;
   document.getElementById("turns").innerText = turns;
-  checkImagePlacement(otherTile);
+  checkImagePlacement(currTile);
+  checkPuzzleSolved();
 }
-
 function checkImagePlacement(image) {
   const imageName = image.src.split("/").pop();
   const imageOrder = parseInt(imageName.split(".")[0], 10);
@@ -98,28 +98,6 @@ function shuffleArray(array) {
   }
   return array;
 }
-function startTimer(duration) {
-  var timer = duration,
-    minutes,
-    seconds;
-  var interval = setInterval(function () {
-    minutes = parseInt(timer / 60, 10);
-    seconds = parseInt(timer % 60, 10);
-    document.getElementById("timer").innerText =
-      minutes + "m " + seconds + "s ";
-    if (--timer < 0) {
-      timer = duration;
-      clearInterval(interval);
-      timerExpired = true; // Timer ist abgelaufen
-      document.getElementById("message").style.display = "block";
-      // Entferne die Eventlistener für das Ziehen der Bilder
-      // in die function timer mit einbauen damit sound spielt wenn timer abgelaufen ist
-      document.getElementById("timerSound").play("bing.mp3");
-    }
-  }, 1000);
-}
-startTimer(330);
-removeDragEventListeners();
 
 // Let komplett einsetzen damit der sound abgespielt wird
 // let timerSound = document.getElementById("timerSound");
@@ -128,14 +106,6 @@ function playSound() {
   timerSound.play("bing.mp3");
   // Event-Listener entfernen, um nur einmal abzuspielen
   timerSound.removeEventListener("ended", playSound);
-}
-
-function removeDragEventListeners() {
-  const tiles = document.querySelectorAll("img");
-  tiles.forEach(function (tile) {
-    tile.removeEventListener("dragstart", moveStart);
-    tile.removeEventListener("dragend", moveEnd);
-  });
 }
 let reloadButton = document.getElementById("reloadButton");
 reloadButton.addEventListener("click", function () {
@@ -153,15 +123,26 @@ function toggleImage() {
   }
   isImageVisible = !isImageVisible;
 }
-
 toggleButton.addEventListener("mousedown", toggleImage);
 toggleButton.addEventListener("mouseup", toggleImage);
-function allImagesPlacedCorrectly() {
-  const imageElements = document.querySelectorAll("img");
-  for (const image of imageElements) {
-    if (!image.style.border.includes("green")) {
-      return false; // Es gibt mindestens ein Bild, das nicht korrekt platziert wurde
+let timerInterval;
+
+function startTimer(duration) {
+  var timer = duration,
+    minutes,
+    seconds;
+  timerInterval = setInterval(function () {
+    minutes = parseInt(timer / 60, 10);
+    seconds = parseInt(timer % 60, 10);
+    document.getElementById("timer").innerText =
+      minutes + "m " + seconds + "s ";
+    if (--timer < 0) {
+      timer = duration;
+      clearInterval(timerInterval);
+      timerExpired = true;
+      document.getElementById("message").innerText = "Zeit ist um!";
+      document.getElementById("message").style.display = "block";
+      document.getElementById("timerSound").play();
     }
-  }
-  return true; // Alle Bilder sind korrekt platziert
+  }, 1000);
 }
