@@ -1,110 +1,9 @@
-/* var rows = 5;
-var columns = 5;
-
-var currTile;
-var otherTile;
-var turns = 0;
-
-function moveStart() {
-  currTile = this;
-}
-
-function moveOver(e) {
-  e.preventDefault();
-}
-
-function moveEnter(e) {
-  e.preventDefault();
-}
-
-function moveLeave() {}
-
-function moveDrop() {
-  otherTile = this;
-}
-
-function moveEnd() {
-  if (currTile.src.includes("blank")) {
-    return;
-  }
-  let currImg = currTile.src;
-  let otherImg = otherTile.src;
-  currTile.src = otherImg;
-  otherTile.src = currImg;
-
-  turns += 1;
-  document.getElementById("turns").innerText = turns;
-}
-
-window.onload = function () {
-  for (let r = 0; r < rows; r++) {
-    for (let c = 0; c < columns; c++) {
-      let tile = document.createElement("img");
-      tile.src = "./images/blank.jpg";
-
-      tile.addEventListener("dragstart", moveStart);
-      tile.addEventListener("dragover", moveOver);
-      tile.addEventListener("dragenter", moveEnter);
-      tile.addEventListener("dragleave", moveLeave);
-      tile.addEventListener("drop", moveDrop);
-      tile.addEventListener("dragend", moveEnd);
-
-      document.getElementById("board").append(tile);
-    }
-  }
-
-  let pieces = [];
-  for (let i = 1; i <= rows * columns; i++) {
-    pieces.push(i.toString());
-  }
-  pieces.reverse();
-
-  for (let i = 0; i < pieces.length; i++) {
-    let tile = document.createElement("img");
-    tile.src = "./images/" + pieces[i] + ".jpg";
-
-    tile.addEventListener("dragstart", moveStart);
-    tile.addEventListener("dragover", moveOver);
-    tile.addEventListener("dragenter", moveEnter);
-    tile.addEventListener("dragleave", moveLeave);
-    tile.addEventListener("drop", moveDrop);
-    tile.addEventListener("dragend", moveEnd);
-
-    document.getElementById("pieces").append(tile);
-  }
-};
-
-function startTimer(duration) {
-  var timer = duration,
-    minutes,
-    seconds;
-  var interval = setInterval(function () {
-    minutes = parseInt(timer / 60, 10);
-    seconds = parseInt(timer % 60, 10);
-    document.getElementById("timer").innerText =
-      minutes + "m " + seconds + "s ";
-    if (--timer < 0) {
-      timer = duration;
-    }
-    if (timer == 0) {
-      alert("Time is up!");
-      clearInterval(interval);
-    }
-  }, 1000);
-}
-startTimer(300);
-var reloadButton = document.getElementById("reloadButton");
-
-reloadButton.addEventListener("click", function () {
-  location.reload();
-}); */
-
-var rows = 5;
-var columns = 5;
-
-var currTile;
-var otherTile;
-var turns = 0;
+let rows = 5;
+let columns = 5;
+let currTile;
+let otherTile;
+let turns = 0;
+let timerExpired = false;
 
 function moveStart() {
   if (this.style.border.includes("green")) {
@@ -129,28 +28,24 @@ function moveDrop() {
 }
 
 function moveEnd() {
-  if (currTile.src.includes("blank")) {
+  if (timerExpired || currTile.src.includes("blank")) {
     return;
   }
   let currImg = currTile.src;
   let otherImg = otherTile.src;
   currTile.src = otherImg;
   otherTile.src = currImg;
-
   turns += 1;
   document.getElementById("turns").innerText = turns;
-
-  checkImagePlacement(otherTile);
+  checkImagePlacement(currTile);
+  checkPuzzleSolved();
 }
-
 function checkImagePlacement(image) {
   const imageName = image.src.split("/").pop();
   const imageOrder = parseInt(imageName.split(".")[0], 10);
-
   const boardIndex = Array.from(
     document.getElementById("board").children
   ).indexOf(image);
-
   if (imageOrder === boardIndex + 1) {
     image.style.border = "1.5px solid green";
     // Bild ist an der richtigen Stelle
@@ -158,7 +53,6 @@ function checkImagePlacement(image) {
     image.removeEventListener("dragend", moveEnd);
     image.removeEventListener("dragover", moveOver);
     image.removeEventListener("dragenter", moveEnter);
-    image.removeEventListener("dragleave", moveLeave);
     image.removeEventListener("drop", moveDrop);
   } else {
     image.style.border = "1.5px solid red";
@@ -171,18 +65,15 @@ window.onload = function () {
     for (let c = 0; c < columns; c++) {
       let tile = document.createElement("img");
       tile.src = "./images/blank.jpg";
-
       tile.addEventListener("dragstart", moveStart);
       tile.addEventListener("dragover", moveOver);
       tile.addEventListener("dragenter", moveEnter);
       tile.addEventListener("dragleave", moveLeave);
       tile.addEventListener("drop", moveDrop);
       tile.addEventListener("dragend", moveEnd);
-
       document.getElementById("board").append(tile);
     }
   }
-
   let pieces = [];
   for (let i = 1; i <= rows * columns; i++) {
     pieces.push(i.toString() + ".jpg");
@@ -213,28 +104,50 @@ function shuffleArray(array) {
   return array;
 }
 
+// Let komplett einsetzen damit der sound abgespielt wird
+// let timerSound = document.getElementById("timerSound");
+function playSound() {
+  timerSound.currentTime = 0;
+  timerSound.play("bing.mp3");
+  // Event-Listener entfernen, um nur einmal abzuspielen
+  timerSound.removeEventListener("ended", playSound);
+}
+let reloadButton = document.getElementById("reloadButton");
+reloadButton.addEventListener("click", function () {
+  location.reload();
+});
+const image = document.getElementById("image");
+const toggleButton = document.getElementById("toggleButton");
+let isImageVisible = false;
+// dazu da das das Bild beim Start nicht angezeigt wird aber dafür beim klicken
+function toggleImage() {
+  if (isImageVisible) {
+    image.style.display = "none"; // Bild ausblenden
+  } else {
+    image.style.display = "block"; // Bild anzeigen
+  }
+  isImageVisible = !isImageVisible;
+}
+toggleButton.addEventListener("mousedown", toggleImage);
+toggleButton.addEventListener("mouseup", toggleImage);
+let timerInterval;
+
 function startTimer(duration) {
   var timer = duration,
     minutes,
     seconds;
-  var interval = setInterval(function () {
+  timerInterval = setInterval(function () {
     minutes = parseInt(timer / 60, 10);
     seconds = parseInt(timer % 60, 10);
     document.getElementById("timer").innerText =
       minutes + "m " + seconds + "s ";
     if (--timer < 0) {
       timer = duration;
-    }
-    if (timer == 0) {
-      alert("Time is up!");
-      clearInterval(interval);
-      moveEnd();
+      clearInterval(timerInterval);
+      timerExpired = true;
+      document.getElementById("message").innerText = "Zeit ist um!";
+      document.getElementById("message").style.display = "block";
+      document.getElementById("timerSound").play();
     }
   }, 1000);
 }
-startTimer(180);
-var reloadButton = document.getElementById("reloadButton");
-
-reloadButton.addEventListener("click", function () {
-  location.reload();
-});
