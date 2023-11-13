@@ -89,6 +89,16 @@ function startTimer(duration) {    //das ist die funktion für den timer
       clearInterval(interval);
       document.getElementById("message").style.display = "block"; // Zeigt die nachricht über dem timer an wenn die zeit abgelaufen ist 
     }
+
+    document.getElementById("timerSound").play("bing.mp3");
   }, 1000);
 }
 startTimer(300); // Zeit wariabel einstellen um das spiel zu verlängern oder zu verkürzen
+
+function playSound() {
+  timerSound.currentTime = 0;
+  timerSound.play("bing.mp3");
+  
+  // Event-Listener entfernen, um nur einmal abzuspielen
+  timerSound.removeEventListener("ended", playSound);
+}
