@@ -17,7 +17,7 @@ function moveEnter(e) {
   e.preventDefault();
 }
 
-function moveLeave() { }
+function moveLeave() {}
 
 function moveDrop() {
   otherTile = this;
@@ -74,20 +74,27 @@ window.onload = function () {
   }
 };
 
-
-
-function startTimer(duration) {    //das ist die funktion für den timer
+function startTimer(duration) {
   var timer = duration,
     minutes,
     seconds;
   var interval = setInterval(function () {
-    minutes = parseInt(timer / 60, 10);  
+    minutes = parseInt(timer / 60, 10);
     seconds = parseInt(timer % 60, 10);
-    document.getElementById("timer").innerText = minutes + "m " + seconds + "s "; //hier wird auch die preziese Zeit angezeigt min und sek
+    document.getElementById("timer").innerText =
+      minutes + "m " + seconds + "s ";
     if (--timer < 0) {
       timer = duration;
       clearInterval(interval);
-      document.getElementById("message").style.display = "block"; // Zeigt die nachricht über dem timer an wenn die zeit abgelaufen ist 
+      timerExpired = true; // Timer ist abgelaufen
+      document.getElementById("message").innerText = "You lose, Time is up!";
+      document.getElementById("message").style.display = "block";
+      removeDragEventListeners();
+    } else if (allImagesPlacedCorrectly()) {
+      clearInterval(interval);
+      document.getElementById("message").innerText = "You win!";
+      document.getElementById("message").style.display = "block";
+      removeDragEventListeners();
     }
 
     document.getElementById("timerSound").play("bing.mp3");
