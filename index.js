@@ -41,26 +41,6 @@ function moveEnd() {
   checkPuzzleSolved();
 }
 
-function checkImagePlacement(image) {
-  const imageName = image.src.split("/").pop();
-  const imageOrder = parseInt(imageName.split(".")[0], 10);
-  const boardIndex = Array.from(
-    document.getElementById("board").children
-  ).indexOf(image);
-  if (imageOrder === boardIndex + 1) {
-    image.style.border = "1.5px solid green";
-    // Bild ist an der richtigen Stelle
-    image.removeEventListener("dragstart", moveStart);
-    image.removeEventListener("dragend", moveEnd);
-    image.removeEventListener("dragover", moveOver);
-    image.removeEventListener("dragenter", moveEnter);
-    image.removeEventListener("drop", moveDrop);
-  } else {
-    image.style.border = "1.5px solid red";
-    // Bild ist an der falschen Stelle
-  }
-}
-
 window.onload = function () {
   for (let r = 0; r < rows; r++) {
     for (let c = 0; c < columns; c++) {
@@ -94,6 +74,14 @@ window.onload = function () {
   startTimer(330);
 };
 
+function shuffleArray(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+  return array;
+}
+
 function checkImagePlacement(image) {
   const imageName = image.src.split("/").pop();
   const imageOrder = parseInt(imageName.split(".")[0], 10);
@@ -114,14 +102,7 @@ function checkImagePlacement(image) {
   }
 }
 
-function shuffleArray(array) {
-  for (let i = array.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [array[i], array[j]] = [array[j], array[i]];
-  }
-  return array;
-}
-
+//Melle
 // Let komplett einsetzen damit der sound abgespielt wird
 // let timerSound = document.getElementById("timerSound");
 function playSound() {
@@ -173,6 +154,8 @@ function startTimer(duration) {
     }
   }, 1000);
 }
+
+// Melle
 
 function checkPuzzleSolved() {
   const boardImages = document.getElementById("board").children;
