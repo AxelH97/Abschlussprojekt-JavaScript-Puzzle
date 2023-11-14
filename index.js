@@ -117,7 +117,7 @@ function startTimer(duration) {
     }
   }, 1000);
 }
-startTimer(20);
+startTimer(330);
 removeDragEventListeners();
 
 // function komplett einsetzen damit der sound abgespielt wird wenn timer abgelaufen ist
@@ -131,8 +131,8 @@ function playSound() {
 }
 
 
-// Alles dafür da das das original Bild anzeigt wird 
-// wen man den button klickt und hält 
+// Alles dafür da das, das original Bild anzeigt wird 
+// wen man den button geklickt hält 
 
 function removeDragEventListeners() {
   const tiles = document.querySelectorAll("img");
