@@ -100,14 +100,48 @@ function shuffleArray(array) {
   }
   return array;
 }
+function startTimer(duration) {
+  let timer = duration,
+    minutes,
+    seconds;
+  let interval = setInterval(function () {
+    minutes = parseInt(timer / 60, 10);
+    seconds = parseInt(timer % 60, 10);
+    document.getElementById("timer").innerText =
+      minutes + "m " + seconds + "s ";
+    if (--timer < 0) {
+      timer = duration;
+      clearInterval(interval);
+      timerExpired = true; // Timer ist abgelaufen
+      document.getElementById("message").style.display = "block";
+    // in die function timer mit einbauen damit sound spielt wenn timer abgelaufen ist
+      document.getElementById("timerSound").play("bing.mp3");
+    }
+  }, 1000);
+}
+startTimer(330);
+removeDragEventListeners();
 
-// Let komplett einsetzen damit der sound abgespielt wird
-// let timerSound = document.getElementById("timerSound");
+// function komplett einsetzen damit der sound abgespielt wird wenn timer abgelaufen ist
+
 function playSound() {
   timerSound.currentTime = 0;
   timerSound.play("bing.mp3");
-  // Event-Listener entfernen, um nur einmal abzuspielen
+  // Eine Event-Listener entfernen, um nur einmal abzuspielen errinerung gesezt da 
+  // ich es immer zwei mal drinne hatte und der mehr mals abgespielt wurde 
   timerSound.removeEventListener("ended", playSound);
+}
+
+
+// Alles dafür da das, das original Bild anzeigt wird 
+// wen man den button geklickt hält 
+
+function removeDragEventListeners() {
+  const tiles = document.querySelectorAll("img");
+  tiles.forEach(function (tile) {
+    tile.removeEventListener("dragstart", moveStart);
+    tile.removeEventListener("dragend", moveEnd);
+  });
 }
 let reloadButton = document.getElementById("reloadButton");
 reloadButton.addEventListener("click", function () {
