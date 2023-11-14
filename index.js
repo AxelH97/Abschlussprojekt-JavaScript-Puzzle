@@ -99,10 +99,10 @@ function shuffleArray(array) {
   return array;
 }
 function startTimer(duration) {
-  var timer = duration,
+  let timer = duration,
     minutes,
     seconds;
-  var interval = setInterval(function () {
+  let interval = setInterval(function () {
     minutes = parseInt(timer / 60, 10);
     seconds = parseInt(timer % 60, 10);
     document.getElementById("timer").innerText =
@@ -112,23 +112,27 @@ function startTimer(duration) {
       clearInterval(interval);
       timerExpired = true; // Timer ist abgelaufen
       document.getElementById("message").style.display = "block";
-      // Entferne die Eventlistener für das Ziehen der Bilder
-      // in die function timer mit einbauen damit sound spielt wenn timer abgelaufen ist
+    // in die function timer mit einbauen damit sound spielt wenn timer abgelaufen ist
       document.getElementById("timerSound").play("bing.mp3");
     }
   }, 1000);
 }
-startTimer(330);
+startTimer(20);
 removeDragEventListeners();
 
-// Let komplett einsetzen damit der sound abgespielt wird
-// let timerSound = document.getElementById("timerSound");
+// function komplett einsetzen damit der sound abgespielt wird wenn timer abgelaufen ist
+
 function playSound() {
   timerSound.currentTime = 0;
   timerSound.play("bing.mp3");
-  // Event-Listener entfernen, um nur einmal abzuspielen
+  // Eine Event-Listener entfernen, um nur einmal abzuspielen errinerung gesezt da 
+  // ich es immer zwei mal drinne hatte und der mehr mals abgespielt wurde 
   timerSound.removeEventListener("ended", playSound);
 }
+
+
+// Alles dafür da das das original Bild anzeigt wird 
+// wen man den button klickt und hält 
 
 function removeDragEventListeners() {
   const tiles = document.querySelectorAll("img");
@@ -153,15 +157,6 @@ function toggleImage() {
   }
   isImageVisible = !isImageVisible;
 }
-
 toggleButton.addEventListener("mousedown", toggleImage);
 toggleButton.addEventListener("mouseup", toggleImage);
-function allImagesPlacedCorrectly() {
-  const imageElements = document.querySelectorAll("img");
-  for (const image of imageElements) {
-    if (!image.style.border.includes("green")) {
-      return false; // Es gibt mindestens ein Bild, das nicht korrekt platziert wurde
-    }
-  }
-  return true; // Alle Bilder sind korrekt platziert
-}
+
