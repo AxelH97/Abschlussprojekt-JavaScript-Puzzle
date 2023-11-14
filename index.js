@@ -37,6 +37,7 @@ function moveEnd() {
   turns += 1;
   document.getElementById("turns").innerText = turns;
   checkImagePlacement(otherTile);
+  checkPuzzleSolved();
 }
 
 function checkImagePlacement(image) {
@@ -89,6 +90,7 @@ window.onload = function () {
     tile.addEventListener("dragend", moveEnd);
     document.getElementById("pieces").append(tile);
   }
+  startTimer(330);
 };
 
 function shuffleArray(array) {
@@ -159,4 +161,51 @@ function toggleImage() {
 }
 toggleButton.addEventListener("mousedown", toggleImage);
 toggleButton.addEventListener("mouseup", toggleImage);
+let timerInterval;
 
+function startTimer(duration) {
+  var timer = duration,
+    minutes,
+    seconds;
+  timerInterval = setInterval(function () {
+    minutes = parseInt(timer / 60, 10);
+    seconds = parseInt(timer % 60, 10);
+    document.getElementById("timer").innerText =
+      minutes + "m " + seconds + "s ";
+    if (--timer < 0) {
+      timer = duration;
+      clearInterval(timerInterval);
+      timerExpired = true;
+      document.getElementById("message").innerText = "Zeit ist um!";
+      document.getElementById("message").style.display = "block";
+      document.getElementById("timerSound").play();
+    }
+  }, 1000);
+}
+function checkPuzzleSolved() {
+  const boardImages = document.getElementById("board").children;
+  for (let i = 0; i < boardImages.length; i++) {
+    const image = boardImages[i];
+    const imageName = image.src.split("/").pop();
+    const imageOrder = parseInt(imageName.split(".")[0], 10);
+    if (imageOrder !== i + 1) {
+      // Wenn die Reihenfolge nicht stimmt, ist das Puzzle nicht gelöst
+      return false;
+    }
+  }
+  // Puzzle ist gelöst
+  clearInterval(timerInterval); // Timer stoppen
+  document.getElementById("message").innerText = "Puzzle gelöst!";
+  document.getElementById("message").style.display = "block";
+  document.getElementById("timerSound").play(); // Sound abspielen
+  // Entferne die Eventlistener für das Ziehen der Bilder
+  const puzzleImages = document.querySelectorAll("#board img");
+  puzzleImages.forEach((image) => {
+    image.removeEventListener("dragstart", moveStart);
+    image.removeEventListener("dragend", moveEnd);
+    image.removeEventListener("dragover", moveOver);
+    image.removeEventListener("dragenter", moveEnter);
+    image.removeEventListener("drop", moveDrop);
+  });
+  return true;
+}
