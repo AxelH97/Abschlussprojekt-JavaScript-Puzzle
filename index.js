@@ -4,6 +4,7 @@ let currTile;
 let otherTile;
 let turns = 0;
 let timerExpired = false;
+
 function moveStart() {
   if (this.style.border.includes("green")) {
     return;
@@ -11,16 +12,20 @@ function moveStart() {
   currTile = this;
   this.style.border = "1px solid black";
 }
+
 function moveOver(e) {
   e.preventDefault();
 }
+
 function moveEnter(e) {
   e.preventDefault();
 }
+
 function moveLeave() {}
 function moveDrop() {
   otherTile = this;
 }
+
 function moveEnd() {
   if (timerExpired || currTile.src.includes("blank")) {
     return;
@@ -115,6 +120,7 @@ function shuffleArray(array) {
   }
   return array;
 }
+
 // Let komplett einsetzen damit der sound abgespielt wird
 // let timerSound = document.getElementById("timerSound");
 function playSound() {
@@ -123,13 +129,16 @@ function playSound() {
   // Event-Listener entfernen, um nur einmal abzuspielen
   timerSound.removeEventListener("ended", playSound);
 }
+
 let reloadButton = document.getElementById("reloadButton");
 reloadButton.addEventListener("click", function () {
   location.reload();
 });
+
 const image = document.getElementById("image");
 const toggleButton = document.getElementById("toggleButton");
 let isImageVisible = false;
+
 // dazu da das das Bild beim Start nicht angezeigt wird aber dafür beim klicken
 function toggleImage() {
   if (isImageVisible) {
@@ -139,6 +148,7 @@ function toggleImage() {
   }
   isImageVisible = !isImageVisible;
 }
+
 toggleButton.addEventListener("mousedown", toggleImage);
 toggleButton.addEventListener("mouseup", toggleImage);
 let timerInterval;
@@ -161,6 +171,7 @@ function startTimer(duration) {
     }
   }, 1000);
 }
+
 function checkPuzzleSolved() {
   const boardImages = document.getElementById("board").children;
   for (let i = 0; i < boardImages.length; i++) {
@@ -173,6 +184,7 @@ function checkPuzzleSolved() {
     }
   }
   // Puzzle ist gelöst
+
   clearInterval(timerInterval); // Timer stoppen
   document.getElementById("message").innerText = "Puzzle gelöst!";
   document.getElementById("message").style.display = "block";
