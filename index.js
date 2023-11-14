@@ -22,12 +22,13 @@ function moveEnter(e) {
 }
 
 function moveLeave() {}
+
 function moveDrop() {
   otherTile = this;
 }
 
 function moveEnd() {
-  if (timerExpired || currTile.src.includes("blank")) {
+  if (timerExpired) {
     return;
   }
   let currImg = currTile.src;
@@ -152,6 +153,7 @@ function toggleImage() {
 toggleButton.addEventListener("mousedown", toggleImage);
 toggleButton.addEventListener("mouseup", toggleImage);
 let timerInterval;
+
 function startTimer(duration) {
   var timer = duration,
     minutes,
