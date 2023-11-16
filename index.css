@@ -142,3 +142,7 @@ der von der message */
     display: none;
   }
 }
+
+#copy {
+  color: orange;
+}
